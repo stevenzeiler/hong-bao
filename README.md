@@ -9,7 +9,7 @@ The repo name is the Chinese word for a red envelope, a gift of money. The npm p
 ## What is in here
 
 - `server.js` and `index.js`: a small Express server that serves `public/` and exposes one route, `GET /bridge/payments/:alipay_username/:amount`.
-- `lib/`: building blocks for a USD to CNY payment: a Ripple pathfinder, a payment builder, a currency converter, a Ripple name (federation) resolver and an Open Exchange Rates client.
+- `lib/`: building blocks for a USD to CNY payment: a Ripple pathfinder, a payment builder, a currency converter, an Alipay quote client for the `ripplecn.com` bridge (`federation_resolver.js`) and an Open Exchange Rates client.
 - `public/`: the browser app (Bootstrap, jQuery, Backbone, the Ripple JS library, a Famo.us version in `public/src/famous.js`) plus `api.html`, a short note on the `POST /stripe` request the buy flow was designed around.
 - `test/`: mocha-style tests for the `lib/` modules.
 
@@ -37,7 +37,7 @@ If you revive this, move these into environment variables first. See `docs/STATU
 ## How it works
 
 1. The visitor chooses an amount and enters a Ripple name.
-2. The name is resolved to a Ripple address through federation.
+2. The browser looks the name up at `id.ripple.com` to get its Ripple address.
 3. The browser sends the amount and a card token to the server (`POST /stripe`, described in `public/api.html`).
 4. The server finds a payment path, and the browser follows progress over a websocket to the Ripple network.
 
@@ -48,6 +48,10 @@ Steps 3 and 4 are described from the front-end code and the API note. The server
     npm test
 
 As committed, `package.json` sets the test script to `npm test`, which calls itself, so it does not run the tests. The tests in `test/` also need a mocha install and live services. See `AGENTS.md` and `docs/STATUS.md`.
+
+## Credits
+
+Written by Steven Zeiler, with 11 commits from Abiy Seifu in August 2014 (the `/bridge/payments` route, `build_payment.js`, the Open Exchange Rates client, their tests and header styling).
 
 ## License
 

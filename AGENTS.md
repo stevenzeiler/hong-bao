@@ -18,7 +18,7 @@ Guidance for AI agents working in this repo. Humans: see `README.md`.
 - `server.js`: starts Express on port 5656.
 - `index.js`: the router (static files plus `/bridge/payments/:alipay_username/:amount`).
 - `lib/`: `pathfinder.js`, `build_payment.js`, `currency_converter.js`, `federation_resolver.js`, `open_exchange_client.js`.
-- `test/`: one file per `lib/` module plus an empty `router.js`.
+- `test/`: one file per `lib/` module plus a placeholder `router.js`.
 - `public/`: browser app and vendored libraries.
 - `docs/STATUS.md`: current state and the gap to the repo standard.
 
